@@ -1,8 +1,8 @@
 ---
 # Title, summary, and page position.
-linktitle: Chapter 2
+linktitle: Control Flow
 summary: Learn how to use Academic's docs layout for publishing online courses, software documentation, and tutorials.
-weight: 1
+weight: 2
 icon: book-reader
 icon_pack: fas
 
