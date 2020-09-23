@@ -2,7 +2,7 @@
 # Title, summary, and page position.
 linktitle: C++
 summary: Workshop of C++
-weight: 1
+weight: 0
 icon: book
 icon_pack: fas
 

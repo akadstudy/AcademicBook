@@ -1,15 +1,13 @@
 ---
-title: First Application
-linktitle: First Application
+title: First C++ Application
+linktitle: First C++ Application
 type: book
 date: "2019-05-05T00:00:00+01:00"
 # Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 3
-
+weight: 1
 ---
 
-
-## Overview
+# Overview
 
 This chapter equips you with the fundamental tools and techniques required to get started building basic C++ applications. We'll start by breaking a C++ application into its core components, identifying each by their role(s). We'll then take a look at the core language that defines C++, including pre-processor directives—statements that let us perform actions before our code is compiled. Finally, we'll look at how we get information in and out of our applications (I/O) before putting this all together in a final exercise in which you will write and run your own C++ application in an online compiler.
 
