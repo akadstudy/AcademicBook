@@ -7,7 +7,7 @@ date: "2019-05-05T00:00:00+01:00"
 weight: 1
 ---
 
-# Overview
+## Overview
 
 This chapter equips you with the fundamental tools and techniques required to get started building basic C++ applications. We'll start by breaking a C++ application into its core components, identifying each by their role(s). We'll then take a look at the core language that defines C++, including pre-processor directives—statements that let us perform actions before our code is compiled. Finally, we'll look at how we get information in and out of our applications (I/O) before putting this all together in a final exercise in which you will write and run your own C++ application in an online compiler.
 
@@ -24,6 +24,8 @@ To start our journey, we looked at a brief history of the language. While this a
 We're then going to jump right into dissecting a basic C++ application. By breaking an application down into its constituent parts, we can gain an understanding of the main pieces that it comprises. We'll then expand on this basic understanding by looking at each part in more detail throughout the rest of this introductory chapter.
 
 When we've concluded this chapter, we'll not only have an understanding of the origin of the language; we'll also be familiar with the different core parts of an application. We'll be able to look at an example C++ application with a sense of meaning and understanding. We'll then use this basic understanding to springboard into the next chapter, where we'll look deeper into the language at specific features and functionality.
+
+---
 
 ## Advantages of C++
 
@@ -87,6 +89,8 @@ And that's our first C++ application; there's not too much to it. From here, the
 
 Seeing this application typed out is one thing, but let's get it running in our first exercise.
 
+---
+
 ## Compiling Our First Application
 
 In this exercise, we are going to compile and run our first C++ application. We're going to be using an online compiler throughout the course (and the reasons for doing so will be explained after this exercise) but for now, let's get that compiler up and running. Perform the following steps to complete the exercise:
@@ -126,6 +130,8 @@ Try changing the text to something unique and run the program again.
 - **repl.it**: This website allows you to compile multiple files. You can find it [here](https://repl.it/languages/cpp).
 - **Rextester**: This website lets you compile a single file using Microsoft Visual C++. You can find it [here](https://rextester.com/).
 
+---
+
 ## C++ Build Pipeline
 
 Before we go any further, let's take a moment to discuss the build pipeline. This is the process that turns the code that we write into an executable that our machines are capable of running. When we write our C++ code, we're writing a highly abstracted set of instructions. Our machines don't natively read C++ as we do, and likewise, they're unable to run our C++ files as we write them. They first have to be compiled into an executable. This process consists of a number of discrete steps and transforms our code into a more machine-friendly format along the way:
@@ -135,7 +141,9 @@ Before we go any further, let's take a moment to discuss the build pipeline. Thi
 - **Linker**: The linker is the last step in producing our executable. Once the compiler has turned our source code into binary objects, the linker comes through and links them all together, putting together our final executable.
 - The aforementioned steps have been visualized in the following process flow diagram:
 
-
+<!-- 
+Insert Diagram
+-->
 
 These three steps are what every C++ application goes through, be it a single-file program such as the **"Hello World!"** program we've already discussed, or a multi-thousand-file application that you might see in real-world applications; these fundamental steps remain the same.
 
@@ -143,7 +151,9 @@ Different operating systems have different toolsets that perform these actions, 
 
 This overview of these processes has hopefully provided a solid overview of the fundamentals, so that when you do look to compile your applications in the future, the process will be familiar and you'll understand what's going on behind the scenes.
 
-# C++ Keywords
+---
+
+## C++ Keywords
 
 **Keywords** are words that are reserved by C++. Thus, we cannot use them in our applications for anything other than their intended purposes. For example, a common keyword is **if**, so you would not be able to define a variable or function of that name. It's these keywords that structure the C++ language, and it's through their use that we instruct our program on what it should be doing.
 
@@ -240,7 +250,9 @@ const std::string var3 = "Hello World"; // Const means the value cannot be modif
 static char var4 = 'c'; // Static means the value is shared between all instances of a given class.
 ```
 
-# Preprocessor Directives
+---
+
+## Preprocessor Directives
 
 We've come across this term a few times now, so let's look at what it means. A preprocessor directive is a statement that runs before our code is compiled. This is incredibly useful for a range of different things, from header files to selective code compilation.
 
@@ -401,7 +413,9 @@ Let's say you've got a function that needs to do slightly different things betwe
 
 Now that we have a basic understanding of preprocessor directives, we will apply some of the concepts we've learned by writing a program that defines values through them.
 
-# Defining Values with Preprocessor Directives
+---
+
+## Defining Values with Preprocessor Directives
 
 In this exercise, we're going to build a small application that will give a test score a letter grade. We'll define score thresholds in macros and use them to assign grades:
 
@@ -492,7 +506,9 @@ int main()
 
 5. Now let's run our program. If a user inputs a score between 1-100, we can provide them with a letter grade. For an input of 50, you will obtain the following output: 
 
-# Basic I/O Statements
+---
+
+## Basic I/O Statements
 
 I/O stands for **input/output** and is how we get information in and out of our programs. This can take many forms, from inputting text via a keyboard, to clicking buttons with our mouse, to loading a file, and so on. In this chapter, and in general moving forward, we're going to be sticking with text input/output. For this, we'll use the **iostream** header.
 
@@ -601,7 +617,9 @@ As mentioned earlier, there are other types of input and output associated with 
 
 We will apply our knowledge of the **getline()** method and the **std::cin**, **std:cout**, and **std::endl** objects in the next exercise.
 
-# Reading User Details
+---
+
+## Reading User Details
 
 In this exercise, we're going to write an application that will allow you to input your full name and age. We'll then print this information out, formatting it into complete sentences. Perform the following steps to complete the exercise:
 
@@ -682,7 +700,9 @@ int main()
 
 Thus, with the completion of this exercise, we have put together, through basic IO, a little program that allows users to register their details against something. We will now move on the next topic—functions.
 
-# Functions
+---
+
+## Functions
 
 **Functions** in C++ encapsulate our code into logical units of functionality. We can then call these functions instead of having duplicate code throughout our project. For example, consider a small application that asks users for their name, greets them, and then stores that name in a list, as shown in the following snippet:
 
@@ -848,7 +868,9 @@ In this case, since the second parameter has been omitted, the default value wil
 
 Let's have a quick look at an example of this with another exercise.
 
-# Functions
+---
+
+## Functions
 
 In this exercise, we're going to define and use a function that will output the larger of two numbers. This function will require a return type and two parameters. Perform the following steps to complete the exercise:
 
@@ -933,7 +955,9 @@ int main()
 
 6. Run this in the compiler and test it with some numbers.
 
-# Writing Your Own C++ Application
+---
+
+## Writing Your Own C++ Application
 
 The aim of the activity is to write a system that will ask users for their first name and age. Users will be placed into groups based on their age, and we'll use macros to define these age brackets. We'll print the user's information back to them, along with their assigned group (the name of which is also at your discretion), using functions to encapsulate any repeated functionality. Our desired outcome will be a small program that will be able to sort users into groups, as shown in the following screenshot:
 
@@ -946,3 +970,6 @@ Before you begin, ensure that all previous exercises have been completed because
 5. Write a function that will accept age as a parameter and return the appropriate group name.
 6. Output the user's name and the group that they have been assigned to.
 
+---
+
+## Summary
