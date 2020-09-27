@@ -385,9 +385,735 @@ In this exercise, we will reuse the code from the previous exercise and refactor
 
 We will break this down into a number of simple steps:
 
-First, the variable we're checking here is **number**, so that's going to be the condition that we're switching on. Add that to a **switch** statement and open our curly brackets ready for the rest of the switch block:
+1. First, the variable we're checking here is **number**, so that's going to be the condition that we're switching on. Add that to a **switch** statement and open our curly brackets ready for the rest of the switch block:
 
 ```C++
 switch (number)
     {
 ```
+
+2. Next, we'll convert our first **if** statement into a **case** statement. If we look at the first one, we're checking whether **number** is equal to 1. Add this as our first **case** value and copy the output into the **case** body:
+
+```C++
+    case 1:
+        std::cout << "Fries: $0.99\n";
+    break;
+```
+
+3. Now, repeat this for each of the **if** statements, apart from the last one. If you remember, this statement had no condition that it checked; it's simply the last option. This meant that if all other checks failed, execution would fall right through to that final default statement. This is exactly how the default case works, so we will end by moving that **else** statement into a default case. We should end up with the following **switch** statement, which will replace our **if/else** chain:
+
+```C++
+switch (number)
+    {
+        case 1:
+            std::cout << "Fries: $0.99\n";
+        break;
+
+        case 2:
+            std::cout << "Burger: $1.25\n";
+        break;
+
+        case 3:
+            std::cout << "Shake: $1.50\n";
+        break;
+
+        default:
+            std::cout << "Invalid choice.";
+        break;
+    }
+```
+
+This statement is functioning the same as the chained **if/else**, so you could use either; however, you generally see switch statements over long **if** chains. Now, let's run this code and check that it's behaving how we'd expect.
+
+4. The complete code looks like this:
+
+```C++
+// if/else to switch/case
+#include <iostream>
+#include <string>
+
+int main()
+{
+    std::string input;
+    int number;
+
+    std::cout << "Menu\n";
+    std::cout << "1: Fries\n";
+    std::cout << "2: Burger\n";
+    std::cout << "3: Shake\n";
+    std::cout << "Please enter a number 1-3 to view an item price: ";
+    getline(std::cin, input);
+    number = std::stoi(input);
+ 
+    switch (number)
+    {
+    case 1:
+        std::cout << "Fries: $0.99\n";
+    break;
+
+    case 2:
+        std::cout << "Burger: $1.25\n";
+    break;
+
+    case 3:
+        std::cout << "Shake: $1.50\n";
+    break;
+
+    default:
+        std::cout << "Invalid choice.";
+    break;
+    }
+}
+```
+
+5. Run the complete code. You will obtain an output that's similar to the following:
+
+The program behaves in the same way but is arguably neater and easier to follow. We can clearly see each possible behavior branch and the case that will let it execute.
+
+---
+
+## Loops
+
+Alongside **if** statements, loops are among the most fundamental of programming concepts. Without loops, our code would execute by running through our logic statements one by one and then ending. That's how our applications have worked so far; however, in reality, this really isn't practical. Systems tend to consist of many moving parts, and code execution will jump all around the code base to where it's needed.
+
+We've seen how this can be achieved by creating branches in our code where statements can be evaluated, and we do different things based on the outcome. Another way we do this is via loops. Loops allow us to rerun sections of code, either a set or indefinite number of times depending on which one we choose. We're going to be looking at three: **while**, **do while**, and **for** loops.
+
+## while
+
+A while loop is one of the most basic loops in your arsenal and is usually the outermost loop in an application. When execution enters a while loop it typically won't leave until the condition is false. We say generally because multithreaded applications can break this rule; however, they're beyond the scope of this introductory course. Here is the basic implementation of a while loop:
+
+```C++
+  while (condition)
+    {
+        // Do stuff.
+    }
+```
+
+A common thing to see in an application is an outmost **while** loop that will evaluate a **bool** such as **bIsRunning**. With this, you set an indefinite lifespan for your application, which is usually what we want. We want the software to run for as long as the user wants it to. As soon as we want the loop to stop running, we just change the bool to **false**. We need to be careful here, however, as it's easy to make a **while** loop that never ends as the condition never evaluates **false**. In this case, your loop will get stuck indefinitely with no way out.
+
+The following code snippet shows this approach of using a **while** loop as an outermost loop to control the lifetime of the application. While **bIsRunning** is **true**, the application will run indefinitely:
+
+```C++
+int main()
+{
+    bool bIsRunning;
+
+    // Do application setup.
+
+    while (bIsRunning)
+    {
+        // Run application logic.
+    }
+    // Do application cleanup.
+
+    return 0;
+}
+```
+
+We've written a few example apps that accept user input, but generally stop after the first input. Let's take one of our existing applications and modify it so that it runs in a **while** loop; we'll continue with the menu application that we refactored into a switch. We want to put all of the code that we want to rerun inside the **while** loop. This includes the outputting of the menu items, the user selection, and the outputting of their answers.
+
+---
+
+## Implementing a while Loop
+
+In this exercise, we will reuse the code from *Exercise 7, Re-factor an if/else Chain into switch/case*, and implement a **while** loop in our menu program.
+
+Follow these steps to complete the exercise:
+
+1. Copy the code from the previous exercise into the compiler window.
+2. Now, implement a **while** loop and pass the value **true** into it shown in the following:
+
+```C++
+#include <iostream>
+#include <string>
+
+int main()
+{
+bool bIsRunning = true;
+{
+    while (bIsRunning)
+    {
+        std::string input;
+        int number;
+
+        std::cout << "Menu\n";
+        std::cout << "1: Fries\n";
+        std::cout << "2: Burger\n";
+        std::cout << "3: Shake\n";
+        std::cout << "Please enter a number 1-3 to view an item price: ";
+        getline (std::cin, input);
+        number = std::stoi(input);
+        
+        switch (number)
+        {
+            case 1:
+                std::cout << "Fries: $0.99\n";
+            break;
+
+            case 2:
+                std::cout << "Burger: $1.25\n";
+            break;
+
+            case 3:
+                std::cout << "Shake: $1.50\n";
+            break;
+
+            default:
+                std::cout << "Invalid choice.";
+            break;
+        }
+    }
+}
+}
+```
+
+3. The complete code looks like this:
+
+```C++
+#include <iostream>
+#include <string>
+
+int main() 
+{
+bool bIsRunning = true;
+{
+  while (bIsRunning)
+  {
+      std::string input;
+      int number;
+      std::cout << "Menu\n";
+      std::cout << "1: Fries\n";
+      std::cout << "2: Burger\n";
+      std::cout << "3: Shake\n";
+      std::cout << "Please enter a number 1-3 to view an item price: ";
+      getline(std::cin, input);
+      number = std::stoi(input);
+
+      switch (number)
+      {
+          case 1:
+              std::cout << "Fries: $0.99\n";
+          break;
+
+	  case 2:
+              std::cout << "Burger: $1.25\n";
+          break;
+
+	  case 3:
+              std::cout << "Shake: $1.50\n";
+          break;
+
+	  default:
+              std::cout << "Invalid choice.";
+          break;
+      }
+    }
+  }
+	}	
+```
+
+4. Run the program.
+
+For now, we just want this application to run indefinitely, hence we have used **true** as our expression. We can see that it loops, re-asking the user for their selection again, as shown in the following output:
+
+---
+
+## do while
+
+The structure of a do while loop is very similar to that of a **while** loop, with one fundamental difference: the condition check is after the body. This subtle difference means that the body will always be executed at least once. The basic structure of a **do while** loop is as follows:
+
+```C++
+    do
+    {
+        // code
+    }
+    while (condition);
+```
+
+The following flowchart shows the structure and logic flow of a **do while** loop:
+
+Look at the following example:
+
+```C++
+ while (false)
+    {
+        // Do stuff.
+    }
+```
+
+The code inside this **while** statement will never be executed because we first evaluate the expression, **false**, and thus skip over that code. If we were to use the same condition with a **do while** loop, however, as shown in the following code snippet, we would see different behavior:
+
+```C++
+do
+    {
+        // Do stuff.
+    }
+    while (false);
+```
+
+In this case, since the execution runs from top to bottom, the code is executed first, and then the condition; even though it's **false**, the code has already run once. We will see this with the help of our old friend—the **Hello World** program.
+
+---
+
+## Implementing while and do while Loops with a False Condition
+
+In this exercise, we will edit code "Hello World" program to include a **while** and then a **do while** loop. For both of these loops, we will pass the **false** condition and observe the outputs.
+
+Follow these steps to complete the exercise:
+
+1. Insert the following code, which includes a **while** loop only, in the compiler window, and then execute it:
+
+```C++
+// While loop.
+#include <iostream>
+#include <string>
+
+int main()
+{
+    while (false)
+    {
+        std::cout << "Hello World!";
+    }
+
+    return 0;
+}
+```
+
+You will obtain the following output:
+
+As can be seen in the output, we see nothing in the execution window. Since we did the evaluation first, the program never executed the code. This changes, however, if we replace the while loop with a do while loop.
+
+2. Edit the code to include a **do while** loop, as shown in the following snippet:
+
+```C++
+// do ... while loop.
+#include <iostream>
+#include <string>
+
+int main()
+{
+    do
+    {
+        std::cout << "Hello World!";
+    }
+    while (false);
+
+    return 0;
+}
+```
+
+3. Run the code. You should obtain the following output:
+
+Now, we can see that we do indeed get the words **Hello World** printed to the console; so, while the two loops are similar in nature, they have a big difference. The **while** loop will evaluate the condition first, whereas the **do while** loop evaluates it after.
+
+---
+
+## for
+
+Both **while** and **do while** loops are indefinite loops, meaning they will only stop when their conditions evaluate **false**. Generally, when constructing these loops, we don't know how many iterations we need; we simply set it going and stop it at some later juncture. **for** loops, however, are used when we know how many iterations of something we need, and when we need to know what iteration we're currently on.
+
+For example, let's say we have a collection of contacts and we want to run through them all, printing out their names and numbers. Since we know the size of this collection, we could write a for loop that would iterate the correct number of times, allowing us to visit every element in the collection sequentially. Since we also know which iteration we're currently on, we could use that to determine how we output the data. Perhaps, for the first half of the contact list, we want to output both the name and number, whereas, for the second half, we only require numbers. Or perhaps we want to do something special with the first and last contacts in the list. A **for** loop would allow us to do all of these things.
+
+> Note: One iteration is just a loop running once. If a loop is said to iterate five times, it just means it ran five times.
+
+The basic structure of a **for** loop is as follows:
+
+```C++
+    for (initialization; condition; iteration expression)
+    {
+        statement(s);
+    }
+```
+
+The following flowchart shows the structure and logic flow of a **for** loop:
+
+There are three clauses that are used in a for loop:
+
+- **Initialization**: This is a statement that is run once at the very start of the loop. This is used to declare a variable that will be used as a counter.
+- **Condition**: This is the condition that is checked each time before the loop runs. If the condition is **true**, the loop will run. If the condition is **false**, that's the end of the **for** loop. This is used to check that the counter variable is below a specified value. This is how we control how many times the loop will run.
+- **Iteration Expression**: This is a statement that's run at the end of each loop. It's used to increment the counter variable.
+
+Now, let's implement a basic **for** loop in the next exercise to cement our understanding.
+
+---
+
+## Implementing a for Loop
+
+In this exercise, we will create a **for** loop that will run five times to print out a string of numbers: **01234**.
+
+Perform the following steps to complete the exercise:
+
+1. Begin with the main function:
+
+```C++
+#include <iostream>
+#include <string>
+
+int main()
+{
+```
+
+2. Create a **for** loop with the variable **i** initialized to **0**, and **i** set to be less than **5**; increment the counter, and then finally print the output. You can use the following code for this:
+
+```C++
+    for (int i = 0; i < 5; ++i)
+    {
+        std::cout << i;
+    }
+}
+```
+
+3. The complete code looks like this:
+
+```C++
+#include <iostream>
+#include <string>
+
+int main() 
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        std::cout << i;
+    }
+}
+```
+
+Run the code. You will obtain the following output:
+
+We can see that 5 numbers are printed out, 0 through 4, as shown in the preceding screenshot. Notice that the numbers are 0 through 4, as the increment runs after the main loop body, and **i** starts with a value of 0.
+
+We can break the code down into the three statements we identified in the preceding section: **initialization**, **condition**, and **increment**. Our **initialization** statement in this loop is as follows:
+
+```C++
+    int i = 0
+```
+
+With this statement, we're creating our counter and setting its value to 0. This counter is what will be used to keep track of how many times we want our loop to run. Our **condition** statement in this loop is as follows:
+
+```C++
+    i < 5
+```
+
+This is the **condition** that we check to ensure that the loop can run, similar to how the **while** loop works. At the start of each iteration, this **condition** is checked. If I (our counter variable) is less than the value specified, then the loop will run. Our **increment** statement in this loop is as follows:
+
+```C++
+    ++i
+```
+
+This statement is called after each iteration of the loop and increments our counter so we can keep track of how many times the loop has run.
+
+---
+
+## Range-based for loop
+
+The last loop we're going to look at, and more briefly than the previous three, is the range-based loop. Introduced in C++ 11, this loop allows us to quickly iterate over all objects in a collection. We've not yet covered collections, so we will only address the basics here.
+
+When iterating over collections using a **for** loop, we use the iterator. In our use cases, that's been the **i** variable to access the elements as shown in the following snippet:
+
+```C++
+    int myVector[] {0, 1, 2, 3, 4};
+    for (int i = 0; i < myVector.size(); ++i)
+    {
+        int currentValue = myVector[i];
+        std::cout << "\n" << currentValue;
+    }
+```
+
+With a range-based **for** loop, however, we don't manually get the element via our incrementing value. Instead, the loop simply gives us each value in the collection:
+
+```C++
+    int myVector[] {0, 1, 2, 3, 4};
+    for (int currentValue : myVector)
+    {
+        std::cout << "\n" << currentValue;
+    }
+```
+
+Both these loops will produce the same output, but we can see that the second loop is more concise, less prone to error because we aren't manually fetching our elements, and is also very likely to be more efficient. Generally, if you don't need an index value, then this kind of loop will allow you to have cleaner, more solid code.
+
+## Exercise 11: Generating Random Numbers Using Loops
+
+In this exercise, we're going to build an app that will generate a set of random numbers for the user. Our application will consist of a main outer loop and another loop within it to control the generation of our numbers.
+
+For the outer loop, we're going to use a **while** loop—a common setup for an application. We know that this loop will run indefinitely, so it is perfect for controlling the outermost scope of an application. For the inner loop, we'll use a **for** loop, because we'll know how many numbers our user wants to generate.
+
+Follow these steps to complete the exercise:
+
+1. We'll start by creating our main function and defining our main variables. This includes the bIsRunning bool, which will control the lifetime of our application:
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+
+int main()
+{
+    bool bIsRunning = true;
+    std::string input = "";
+    int count = 0;
+```
+
+Next, we'll output our heading content and create the **main** loop. We're using a **while** loop, and our condition is going to be that **bool** we just defined:
+
+2. Next, we'll output our heading content and create the **main** loop. We're using a **while** loop, and our condition is going to be that **bool** we just defined:
+
+```C++
+    std::cout << "***Random number generator***\n";
+    while (bIsRunning)
+    {
+```
+
+3. With our **while** loop in place, we can now add all the code that we want to run during each iteration of the **main** loop. This starts with outputting our instructions and reading the user input:
+
+```C++
+  std::cout << "Enter amount of numbers to generate, or 0 to exit: ";
+        // Get count from user.
+        getline(std::cin, input);
+        count = std::stoi(input);
+```
+
+We've covered **break** in this chapter, and we can now use it to check whether the user wants to exit the application. If the user entered a **0**, indicating this, we can call **break**, exiting the main **while** loop and ending the application. We'll also set the seed for our random number generation.
+
+> **Note**: To generate our random numbers, we're using **rand** and **srand**. **rand** gives us our random number, and **srand** sets a seed for the random number generation. By using **time(0)**, time in seconds since the epoch, we get a seed and number random enough for our needs.
+
+4. Input the following code to insert a **break** statement to allow the user to exit the application. We'll cover '**break**' in more detail shortly:
+
+```C++
+        // Check if user wants to quit application.
+        if (count == 0)
+        {
+            break;
+        }
+        // Generate and output random numbers.
+        srand((unsigned)time(0));
+```
+
+Now, we can write the **main** loop that will generate our random numbers and output them to the user. Since we got a **count** variable from our user, we can use that to ensure we iterate the correct number of times. Within the loop, we'll generate a random number and do a bit of formatting. After each number, we want to print a comma to create a well-formatted list, but not after the last one. We can use a **continue** statement for this:
+
+> **Note**: The continue statement will be covered in the next topic. For now, note that it allows us to skip the rest of the current loop, starting the next one immediately.
+
+```C++
+        for (int i = 0; i < count; ++i)
+        {
+            std::cout << rand() % 10;
+            if (i == count - 1)
+            {
+                continue;
+            }
+            std::cout << ", ";
+        }
+```
+
+> **Note**: The modulus % operator returns the remainder after division. In the preceding step, we are using it, along with **rand**(), to generate numbers between 0 to 9. We'll cover this, and many other operators, in more detail in Chapter 4, Operators.
+
+6. Finally, we'll output a couple of blank lines for presentation and add our final curly braces:
+
+```C++
+        std::cout << "\n\n";
+      }
+  }
+```
+
+7. The complete code looks like this:
+
+```C++
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+
+int main() 
+{
+    bool bIsRunning = true;
+    std::string input = "";
+    int count = 0;
+    std::cout << "***Random number generator***\n";
+    while (bIsRunning)
+    {
+        std::cout << "Enter amount of numbers to generate, or 0 to exit: ";
+        // Get count from user.
+        getline(std::cin, input);
+        count = std::stoi(input);
+        // Check if user wants to quit application.
+        if (count == 0)
+        {
+            break;
+        }
+
+        // Generate and output random numbers.
+        srand((unsigned) time(0));
+        for (int i = 0; i < count; ++i)
+        {
+            std::cout << rand() % 10;
+            if (i == count - 1)
+	    {
+                continue;
+            }
+            std::cout << ", ";
+            }
+
+	    std::cout << "\n\n";
+        }
+    }
+```
+
+8. Run the application. When complete, the application should be able to generate the specified number of random integers, as shown here:
+
+By using a **while** loop, we've been able to create an application that can be used for an indefinite amount of time. Imagine if every time you went to do something on your computer, you could only do one thing before it needed to be rebooted. This would not be very practical. Having the ability to loop code and manipulate program flow is essential.
+
+---
+
+## break/continue
+
+Having the ability to loop sections of code is very important, but it has to be used carefully. We've seen that it's possible to create loops that never end, and another concern is ensuring that they're used efficiently. So far, the loops we've looked at have been small, and we've been happy to see them run through in their entirety. But what if we needed more control over our loops, perhaps to end one early? Thankfully, we have two important keywords to help us with that**—break** and **continue**.
+
+### break
+
+**break** is a C++ keyword that will exit the current loop, with execution jumping to the next section of code if there is any. This keyword works with the different types of loop that we've covered so far, and we can demonstrate it nicely using a simple counting application, as shown in the following snippet:
+
+```C++
+// Break example.
+#include <iostream>
+#include <string>
+
+int main()
+{
+    std::cout << "Loop Starting ...\n";
+    int count = 0;
+    while (count < 5)
+    {
+        ++count;
+        std::cout << "\n" << count;
+    }
+
+    std::cout << "\n\nLoop finished.";
+}
+```
+
+In this example, we're going to print out 5 numbers, 0-4. If we run this code as is, we can see that the loop runs in its entirety and gives us our expected outcome. We've also got statements at the start and end of the loop so we can see the flow execution more clearly:
+
+Now, what if there was a condition that meant we wanted this loop to stop executing when the count was equal to 2? Well, we can put a **break** statement inside that check using an **if** statement:
+
+```C++
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    std::cout << "Loop Starting ...\n";
+    int count = 1; // init
+    while (count <= 5) // condition
+    {
+        std::cout << "\n" << count;
+        if (count == 2)
+        break;
+        ++count; // increment
+    }
+    std::cout << "\n\nLoop fnished.";
+    
+    return 0;
+}
+```
+
+With that **break** condition in place, as soon as the count is equal to **2** (meaning we'll have had 2 iterations of the loop) then the break will be hit and we'll exit the loop. Now, let's run the application and see what we get:
+
+We can now see, as soon as that condition is met and the **break** statement is hit, that the loop stops iterating, and code execution picks up immediately after the loop. The outcome of this will be exactly the same if we write it as a **do…while**:
+
+```C++
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    std::cout << "Loop Starting ...\n";
+    int count = 1; // init
+    do
+    {
+        std::cout << "\n" << count;
+        if (count == 2)
+        break;
+        ++count; // increment
+    }
+    while (count <= 5); // condition
+
+    std::cout << "\n\nLoop fnished.";
+    return 0;
+}
+```
+
+And it will be the same if we write it as a **for** loop:
+
+```C++
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    std::cout << "Loop Starting ...\n";
+    // init condition increment
+    for (int count = 1; count <= 5; ++count)
+    {
+        std::cout << "\n" << count;
+        if (count == 2)
+        break;
+    }
+    std::cout << "\n\nLoop fnished.";
+    
+    return 0;
+}
+```
+
+Both these loops give the exact same behavior; two iterations before hitting the **break** statement and exiting the loop:
+
+This shows that these loops are sometimes interchangeable, though some are more suited to certain use cases than others. For instance, with the counting example we're using here, a for loop is probably most suitable since it comes with an integer value that increments each loop—something we have to do manually with **while** and **do while** loops. When an incrementing integer is not required, however, a range-based **for** loop is recommended.
+
+### continue
+
+The other keyword we have at our disposal is **continue**. This keyword allows us to skip over the current loop iteration but remain in the loop, in contrast with **break**. Again, the counting example will allow us to demonstrate this. In our example, we're printing the numbers 0-4; let's use the **continue** keyword to skip the printing of the number 3.
+
+As we did with **break**, we can write a condition to check whether the count is equal to 3, and call **count** if so:
+
+```C++
+    if (count == 3)
+    {
+        continue;
+    }
+```
+
+We also need to change the location of this within our function. The **continue** keyword will skip the rest of the loop's body. Currently, this code is at the end of that body, so we won't actually be skipping anything. In order for **continue** to work as expected, it needs to come before any code that we want to skip but after any code we want to execute. For this example, we will place the **continue** keyword with the **if** statement:
+
+```C++
+// continue example.
+#include <iostream>
+#include <string>
+
+int main()
+{
+    std::cout << "Loop Starting ...\n";
+    int count = 0;
+    while (count < 5)
+    {
+        ++count;
+        if (count == 3)
+        {
+            continue;
+        }
+    std::cout << "\n" << count;
+    }
+    std::cout << "\n\nLoop finished.";
+}
+```
+Here, we're always going to increment our **counter** variable and then check whether we want to skip the current iteration. If we do skip it, we'll just go back to the start of the next loop, and if we don't, we'll execute the remainder of the loop as usual. Once you run this code, you will obtain the following output:
+
+We've skipped the printing of number 3 as we wanted, but the loop continued to execute the rest of the way. This can be extremely useful when searching for something. Imagine we have a list of names, and we only want to do things with those that start with the letter D. We could iterate over all our names, first checking whether or not the first letter is D; if not, we continue. In this way, we efficiently skip the use cases that don't interest us.
+
+## Making a Loop More Efficient Using break and continue
+
+In this exercise, we're going to make use of **break** and **continue** to make a loop more efficient. We'll create a loop that will run over the numbers 1-100, printing out only specific multiples of a given value.
+
+Follow these steps to complete the exercise:
+
